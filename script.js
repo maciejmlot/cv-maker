@@ -383,6 +383,8 @@ function fillCodersLabCard() {
 function fillAmPsychCard() {
   const me = patBat;
 
+  document.head.innerHTML += "<link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'>"
+
   var upper = false;
   var name = "";
   for (var c of me.fullName) {
@@ -395,37 +397,25 @@ function fillAmPsychCard() {
     name += c;
   }
 
-  var phone = "";
-  for (var c of me.phone) {
-    if (c == " ") {
-      c = "-";
-    }
-    phone += c;
-  }
-
   document.head.innerHTML +=
     "<link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'><link rel='stylesheet' href='./ampsych-style.css'></link>";
 
-  document.title = "Moja wizytówka";
+  document.title = "Moja wizytówka :)";
 
   document.body.innerHTML =
-    "<div><div><div><a href='tel:" +
+    "<div id='info'><div id='contact'><a href='tel:" +
     me.phone +
     "'>" +
-    phone +
-    "</a></div><div><a href='mailto:" +
-    me.email +
-    "'>" +
-    me.email +
-    "</a></div></div><div><div>" +
+    me.phone +
+    "</a></div><div id='company'>" +
     me.jobs[0].company +
-    "</div><div>" +
+    "<br><span>" +
     me.jobs[0].branch +
-    "</div></div></div><div><div>" +
+    "</span></div></div><div id='me'>" +
     name +
-    "</div><div>" +
+    "<br>" +
     me.jobs[0].proffesion +
-    "</div></div><div>" +
+    "</div><div id='adr-and-fax'>" +
     me.jobs[0].address1 +
     ", " +
     me.jobs[0].city +
