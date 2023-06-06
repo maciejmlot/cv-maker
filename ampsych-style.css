@@ -1,0 +1,48 @@
+html {
+    font-family: "copperplate";
+    font-weight: "100";
+    background-color: #bdbaba;
+}
+body {
+    width: 1200px;
+    height: 710px;
+    font-size: 32px;background-color: #cccbc7;
+    margin: 40px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+#info {
+    display: flex;
+}
+#info div {
+    width: 50%;
+    margin-left: 56px;
+    margin-right: 56px;
+    margin-top: 80px;
+}
+#contact {
+    text-align: left;
+    justify-content: center;
+}
+#company {
+    text-align: right;
+}
+#company span {
+    font-size: 20.4px;
+}
+#me {
+    text-align: center;
+    margin-top: 174px;
+    margin-bottom: 221px;
+}
+#adr-and-fax {
+    font-size: 22px;
+    text-align: center;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 56px;
+}
