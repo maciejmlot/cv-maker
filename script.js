@@ -79,74 +79,252 @@ class Person {
   }
 }
 
-const john = new Person(
-  "Full Name",
-  "Proffesion",
-  "about",
-  Array(
-    new Project("https://example.com", "My examplar project", "Some technology")
-  ),
-  //work experience
-  Array(
-    new Job(
-      "Occupation",
-      "Company Name",
-      "Branch",
-      "Date Started",
-      "Date Fired or Finished",
-      "Company City",
-      "Company Country",
-      Array(
-        "Your responsibilities in this job. Your responsibilities in this job. Your responsibilities in this job. Your responsibilities in this job. Your responsibilities in this job. ",
-        "Your responsibilities in this job. "
-      ),
-      "",
-      ""
-    )
-  ),
-  //education
-  Array(
-    new School(
-      "School Name",
-      "Field of Study",
-      "Date Started",
-      "Date finished",
-      "School City",
-      "School Country"
-    )
-  ),
-  "./img/john.png",
-  "photo's alternative description",
-  "+PH ONE NUM BER",
-  "address@email.com",
-  //hard skills
-  Array("Skill 1"),
-  //soft skills
-  Array("Skill 1"),
-  "",
-  ""
-);
+const me = new Person();
 
-const noone = new Person(
-  "Noone",
-  "Nobody",
-  "Blank...",
-  Array(""),
-  Array(""),
-  Array(""),
-  "./img/noone.png",
-  "nothing to see here",
-  "00000000",
-  "nobody@void.nw",
-  Array(""),
-  Array(""),
-  "",
-  "./img/noone.png"
-);
+var linkCount;
+
+var jobCount;
+
+var schoolCount;
+
+function init() {
+  linkCount = 0;
+
+  jobCount = 0;
+
+  schoolCount = 0;
+}
+
+function saveBasics() {
+  me.fullName = document.getElementById("name").value;
+  me.field = document.getElementById("proffesion").value;
+  me.about = document.getElementById("about").value;
+  me.signature = document.getElementById("signature").value;
+  document.getElementById("save-basics").value = "nadpisz";
+}
+
+function addLink() {
+  if(linkCount == 0) {
+    me.projects = Array();
+  }
+
+  me.projects[linkCount] = new Project(
+    document.getElementById("link").value,
+    document.getElementById("project-name").value,
+    document.getElementById("skills").value,
+  )
+  
+  document.getElementById("link").value = "";
+  document.getElementById("project-name").value = "";
+  document.getElementById("skills").value = "";
+
+  linkCount++;
+}
+
+function editLink() {
+
+}
+
+function deleteLink() {
+
+}
+
+function addJob() {
+  if (jobCount == 0) {
+    me.jobs = Array();
+  }
+
+  var resps = Array();
+  var resp = "";
+  for (var c of document.getElementById("resps").value) {
+    if (c == ',') {
+      resps.push(resp);
+      resp = "";
+    } else {
+      resp += c;
+    }
+  }
+  resps.push(resp);
+  document.getElementById("resps").value = "";
+
+  me.jobs[jobCount] = new Job(
+    document.getElementById("occupation").value,
+    document.getElementById("company").value,
+    document.getElementById("branch").value,
+    document.getElementById("date-hired").value,
+    document.getElementById("date-fired").value,
+    document.getElementById("job-city").value,
+    document.getElementById("job-country").value,
+    resps,
+    document.getElementById("address1").value,
+    document.getElementById("address2").value
+  );
+  
+  document.getElementById("occupation").value = "";
+  document.getElementById("company").value = "";
+  document.getElementById("branch").value = "";
+  document.getElementById("date-hired").value = "";
+  document.getElementById("date-fired").value = "";
+  document.getElementById("job-city").value = "";
+  document.getElementById("job-country").value = "";
+  document.getElementById("address1").value = "";
+  document.getElementById("address2").value = "";
+
+  jobCount++;
+}
+
+function editJob() {
+
+}
+
+function deleteJob() {
+
+}
+
+function addSchool() {
+  if (schoolCount == 0) {
+    me.edu = Array();
+  }
+
+  me.edu[schoolCount] = new School(
+    document.getElementById("school").value,
+    document.getElementById("field").value,
+    document.getElementById("date-started").value,
+    document.getElementById("date-finished").value,
+    document.getElementById("school-city").value,
+    document.getElementById("school-country").value
+  )
+  
+  document.getElementById("school").value = "";
+  document.getElementById("field").value = "";
+  document.getElementById("date-started").value = "";
+  document.getElementById("date-finished").value = "";
+  document.getElementById("school-city").value = "";
+  document.getElementById("school-country").value = "";
+
+  schoolCount++;
+}
+
+function editSchool() {
+
+}
+
+function deleteSchool() {
+
+}
+
+function savePhotos() {
+  me.photo = document.getElementById("photo").value;
+  me.photoDesc = document.getElementById("photo-desc").value;
+  me.profPic = document.getElementById("profile-pic").value;
+  document.getElementById("save-photos").value = "nadpisz";
+}
+
+function saveContacts() {
+  me.phone = document.getElementById("phone").value;
+  me.email = document.getElementById("email").value;
+  document.getElementById("save-contacts").value = "nadpisz";
+}
+
+function saveSkills() {
+  var techs = Array();
+  var softs = Array();
+  var skill = "";
+
+  for (var c of document.getElementById("hard-skills").value) {
+    if (c == ',') {
+      techs.push(skill);
+      skill="";
+    } else {
+      skill += c;
+    }
+  }
+  techs.push(skill);
+  skill="";
+
+  for (var c of document.getElementById("soft-skills").value) {
+    if (c == ',') {
+      softs.push(skill);
+      skill="";
+    } else {
+      skill += c;
+    }
+  }
+  softs.push(skill);
+
+  me.techSkills = techs;
+  me.softSkills = softs;
+
+  document.getElementById("save-skills").value = "nadpisz";
+}
+
+function saveToDB() {
+  //WITAJ JAKUBIE
+}
+
+function display() {
+  document.getElementById("data-disp").innerHTML = "<h4>podstawowe dane</h4><p><strong>imie i nazwisko: </strong>" + me.fullName + "<strong>, zawód: </strong>" + me.field + "<strong>, o mnie: </strong>" + me.about + "</p><img src='" + me.signature + "' alt='podpis'><p><strong>^podpis^</strong></p>";
+
+  var linkList = "";
+  if (linkCount > 0) {
+    linkList += "<ul>";
+    for (var project of me.projects) {
+      //ta pętla nie działą :(( czemu
+      linkList += "<li>" + project.name + ", " + project.tech + ", " + project.link + "<input type='submit' value='edit' onclick='editLink()'><input type='submit' value='delete' onclick='deleteLink()'></li>";
+    }
+    linkList += "</ul>";
+  }
+
+  document.getElementById("data-disp").innerHTML += "<h4>linki</h4>" + linkList;
+
+  var jobList = "";
+  if (jobCount > 0) {
+    jobList += "<ul>";
+    for (var job of me.jobs) {
+      resps = "";
+
+      for (resp of job.responsibilities) {
+        resps += resp + ", ";
+      }
+
+      resps = resps.substr(0, resps.length-2);
+
+      jobList += "<li>" + job.proffesion + " at " + job.company + " specialized in " + job.branch + ", hired from " + job.dateHired + " to " + job.dateFired + ". located in " + job.city + ", " + job.country + ". having had responsibilities such as: " + resps + ". company address: " + job.address1 + " " + job.address2 + "<input type='submit' value='edit' onclick='editJob()'><input type='submit' value='delete' onclick='deleteJob()'></li>";
+    }
+    jobList += "</ul>";
+  }
+
+  document.getElementById("data-disp").innerHTML += "<h4>doswiadczenie zawodowe</h4>" + jobList;
+
+  var schoolList = "";
+  if (schoolCount > 0) {
+    schoolList += "<ul>";
+    for (var school of me.edu) {
+      schoolList += "<li><strong>Szkoła: </strong>" + school.school + ", <strong>profil/kierunek </strong>" + school.field + ", <strong> uczyłem/am się od</strong> " + school.dateStarted + " <strong>do</strong> " + school.dateFinished + ", <strong>miasto</strong> " + school.city + ", <strong>państwo</strong> " + school.country + "<input type='submit' value='edit' onclick='editSchool()'><input type='submit' value='delete' onclick='deleteSchool()'></li>";
+    }
+    schoolList += "</ul>";
+  }
+
+  document.getElementById("data-disp").innerHTML += "<h4>edukacja</h4>" + schoolList;
+
+  document.getElementById("data-disp").innerHTML += "<h4>zdjęcia</h4><p><strong>zdjęcie główne: <img src='" + me.photo + "' alt='" + me.photoDesc + "'><br>zdjęcie profilowe: <img src='" + me.profPic + "'></strong></p>";
+
+  document.getElementById("data-disp").innerHTML += "<h4>kontakt</h4><p><strong>telefon:</strong> " + me.phone + "<strong>e-mail: </strong>" + me.email + "</p>";
+
+  var skillList = "<p><strong>Umiejętności twarde: </strong>";
+  for (skill of me.techSkills) {
+    skillList += skill + ", ";
+  }
+  skillList += "</p><p><strong>Umiejętności miękkie: </strong>";
+  for (skill of me.softSkills) {
+    skillList += skill + ", ";
+  }
+  skillList = skillList.substr(0, skillList.length-2) + "</p>";
+
+  document.getElementById("data-disp").innerHTML += "<h4>umiejętności</h4>" + skillList;
+}
 
 function fillGoITFigma() {
-  const me = patBat;
-
   var techSkills = "";
   var softSkills = "";
 
@@ -293,50 +471,7 @@ function fillGoITFigma() {
     "</section></main>";
 }
 
-const patBat = new Person(
-  "Patrycjusz Batman",
-  "AMERYKAŃSKI PSYCHOL",
-  "jaredzie leto! to ja jestem <strong>amerykañskim psycholem</strong>, zabije ciebie aaaaa aa aa<strong>aa aaaaa aa a aaaaa</strong>",
-  Array(
-    new Project(
-      "https://www.facebook.com/profile.php?id=100087848326497",
-      "<img src='img/icons/icon-facebook.svg'/>",
-      ""
-    ),
-    new Project("#", "<img src='img/icons/icon-instagram.svg'/>", ""),
-    new Project("#", '<img src="img/icons/icon-twitter.svg"/>', "")
-  ),
-  Array(
-    new Job(
-      "Vice President",
-      "Pierce & Pierce",
-      "Investment Bank",
-      "2002",
-      "today",
-      "New York",
-      "USA",
-      Array("rysowanie:)", "porzyczanie kaset", "jedzenie prostytutek"),
-      "55 West 81st Street, Upper West Side",
-      "NY 10024"
-    )
-  ),
-  Array(""),
-  "./img/patbat.png",
-  "codzienne obowiazki",
-  "518 308 3928",
-  "p.b@pierce-pierce.org",
-  Array(""),
-  Array(
-    "potrafie sprawic że sie ktoś otworzy;]",
-    "doskonały gust we fryzurach"
-  ),
-  "./img/signatures/signature.png",
-  "./img/profile-pictures/patbat.png"
-);
-
 function fillCodersLabCard() {
-  const me = patBat;
-
   var links = "";
   if (me.projects[0] != "") {
     for (var project of me.projects) {
@@ -381,8 +516,6 @@ function fillCodersLabCard() {
 }
 
 function fillAmPsychCard() {
-  const me = patBat;
-
   document.head.innerHTML += "<link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'>"
 
   var upper = false;
