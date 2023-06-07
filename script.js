@@ -1,7 +1,8 @@
 //klasy, obiekty flagowe, fill()
 
 class Project {
-  constructor(link, name, tech) {
+  constructor(id, link, name, tech) {
+    this.id = id;
     this.link = link;
     this.name = name;
     this.tech = tech;
@@ -10,6 +11,7 @@ class Project {
 
 class Job {
   constructor(
+    id,
     proffesion,
     company,
     branch,
@@ -21,6 +23,7 @@ class Job {
     address1,
     address2
   ) {
+    this.id = id;
     this.proffesion = proffesion;
     this.company = company;
     this.branch = branch;
@@ -35,7 +38,8 @@ class Job {
 }
 
 class School {
-  constructor(school, field, dateStarted, dateFinished, city, country) {
+  constructor(id, school, field, dateStarted, dateFinished, city, country) {
+    this.id = id;
     this.school = school;
     this.field = field;
     this.dateStarted = dateStarted;
@@ -79,7 +83,7 @@ class Person {
   }
 }
 
-const me = new Person();
+const me = new Person("","","",Array(),Array(),Array(),"","","","",Array(),Array(),"","");
 
 var linkCount;
 
@@ -109,6 +113,7 @@ function addLink() {
   }
 
   me.projects[linkCount] = new Project(
+    linkCount,
     document.getElementById("link").value,
     document.getElementById("project-name").value,
     document.getElementById("skills").value,
@@ -121,12 +126,39 @@ function addLink() {
   linkCount++;
 }
 
-function editLink() {
+function editLink(elem) {
+  var linkId = elem.parentNode.id;
 
+  //dodać values
+  document.getElementById(linkId).innerHTML = "<input type='text' id='edit-" + linkId + "-name' placeholder='nazwa'><input type='text' id='edit-" + linkId + "-link' placeholder='link'><input type='text' id='edit-" + linkId + "-tech' placeholder='umiejętności'><input type='submit' id='" + linkId + "' value='OK' onclick='overwriteLink(this)'><input type='submit' value='anuluj' onclick='display()'>";
 }
 
-function deleteLink() {
+function overwriteLink(elem) {
+  var linkId = elem.id;
+  var id = linkId.substr(4,linkId.length);
 
+  me.projects[id].name = document.getElementById("edit-" + linkId + "-name").value;
+  me.projects[id].link = document.getElementById("edit-" + linkId + "-link").value;
+  me.projects[id].tech = document.getElementById("edit-" + linkId + "-tech").value;
+
+  display();
+}
+
+function deleteLink(elem) {
+  var linkId = elem.parentNode.id;
+  var id = linkId.substr(4,linkId.length);
+
+  var projects = Array();
+
+  for (var i = 0; i < me.projects.length; i++) {
+    if (i != id) projects.push(me.projects[i]);
+  }
+
+  me.projects = projects;
+
+  linkCount--;
+
+  display();
 }
 
 function addJob() {
@@ -148,6 +180,7 @@ function addJob() {
   document.getElementById("resps").value = "";
 
   me.jobs[jobCount] = new Job(
+    jobCount,
     document.getElementById("occupation").value,
     document.getElementById("company").value,
     document.getElementById("branch").value,
@@ -173,12 +206,61 @@ function addJob() {
   jobCount++;
 }
 
-function editJob() {
+function editJob(elem) {
+  var jobId = elem.parentNode.id;
 
+  //dodać values
+  document.getElementById(jobId).innerHTML = "<input type='text' id='edit-" + jobId + "-occupation' placeholder='zajęcie'><input type='text' id='edit-" + jobId + "-company' placeholder='nazwa firmy'><input type='text' id='edit-" + jobId + "-branch' placeholder='branża'><input type='text' id='edit-" + jobId + "-date-hired' placeholder='kiedy zaczęto'><input type='text' id='edit-" + jobId + "-date-fired' placeholder='kiedy skończono'><input type='text' id='edit-" + jobId + "-job-city' placeholder='miasto'><input type='text' id='edit-" + jobId + "-job-country' placeholder='kraj'><input type='text' id='edit-" + jobId + "-resps' placeholder='obowiązek1, obowiązek2...'><input type='text' id='edit-" + jobId + "-address1' placeholder='adres linia 1'><input type='text' id='edit-" + jobId + "-address2' placeholder='adres linia 2'><input type='submit' id='" + jobId + "' value='OK' onclick='overwriteJob(this)'><input type='submit' value='anuluj' onclick='display()'>";
 }
 
-function deleteJob() {
+function overwriteJob(elem) {
+  var jobId = elem.id;
+  console.log(jobId);
+  var id = jobId.substr(3,jobId.length);
+  console.log(id);
 
+  me.jobs[id].proffesion = document.getElementById("edit-" + jobId + "-occupation").value;
+  me.jobs[id].company = document.getElementById("edit-" + jobId + "-company").value;
+  me.jobs[id].branch = document.getElementById("edit-" + jobId + "-branch").value;
+  me.jobs[id].dateHired = document.getElementById("edit-" + jobId + "-date-hired").value;
+  me.jobs[id].dateFired = document.getElementById("edit-" + jobId + "-date-fired").value;
+  me.jobs[id].city = document.getElementById("edit-" + jobId + "-job-city").value;
+  me.jobs[id].country = document.getElementById("edit-" + jobId + "-job-country").value;
+
+  var resps = Array();
+  var resp = "";
+  for (var c of document.getElementById("edit-" + jobId + "-resps").value) {
+    if (c == ',') {
+      resps.push(resp);
+      resp = "";
+    } else {
+      resp += c;
+    }
+  }
+  resps.push(resp);
+  me.jobs[id].responsibilities = resps;
+
+  me.jobs[id].address1 = document.getElementById("edit-" + jobId + "-address1").value;
+  me.jobs[id].address2 = document.getElementById("edit-" + jobId + "-address2").value;
+
+  display();
+}
+
+function deleteJob(elem) {
+  var jobId = elem.parentNode.id;
+  var id = jobId.substr(3,jobId.length);
+
+  var jobs = Array();
+
+  for (var i = 0; i < me.jobs.length; i++) {
+    if (i != id) jobs.push(me.jobs[i]);
+  }
+
+  me.jobs = jobs;
+
+  jobCount--;
+
+  display();
 }
 
 function addSchool() {
@@ -187,6 +269,7 @@ function addSchool() {
   }
 
   me.edu[schoolCount] = new School(
+    schoolCount,
     document.getElementById("school").value,
     document.getElementById("field").value,
     document.getElementById("date-started").value,
@@ -205,12 +288,42 @@ function addSchool() {
   schoolCount++;
 }
 
-function editSchool() {
+function editSchool(elem) {
+  var schoolId = elem.parentNode.id;
 
+  //dodać values
+  document.getElementById(schoolId).innerHTML = "<input type='text' id='edit-" + schoolId + "-school' placeholder='nazwa szkoły'><input type='text' id='edit-" + schoolId + "-field' placeholder='profil/kierunek'><input type='text' id='edit-" + schoolId + "-date-started' placeholder='data rozpoczęcia'><input type='text' id='edit-" + schoolId + "-date-finished' placeholder='data zakończenia'><input type='text' id='edit-" + schoolId + "-school-city' placeholder='miasto'><input type='text' id='edit-" + schoolId + "-school-country' placeholder='kraj'><input type='submit' id='" + schoolId + "' value='OK' onclick='overwriteSchool(this)'><input type='submit' value='anuluj' onclick='display()'>";
 }
 
-function deleteSchool() {
+function overwriteSchool(elem) {
+  var schoolId = elem.id;
+  var id = schoolId.substr(6,schoolId.length);
 
+  me.edu[id].school = document.getElementById("edit-" + schoolId + "-school").value;
+  me.edu[id].field = document.getElementById("edit-" + schoolId + "-field").value;
+  me.edu[id].dateStarted = document.getElementById("edit-" + schoolId + "-date-started").value;
+  me.edu[id].dateFinished = document.getElementById("edit-" + schoolId + "-date-finished").value;
+  me.edu[id].city = document.getElementById("edit-" + schoolId + "-school-city").value;
+  me.edu[id].country = document.getElementById("edit-" + schoolId + "-school-country").value;
+
+  display();
+}
+
+function deleteSchool(elem) {
+  var schoolId = elem.parentNode.id;
+  var id = schoolId.substr(6, schoolId.length);
+
+  var edu = Array();
+
+  for (var i = 0; i < me.edu.length; i++) {
+    if (i != id) edu.push(me.edu[i]);
+  }
+
+  me.edu = edu;
+
+  schoolCount--;
+
+  display();
 }
 
 function savePhotos() {
@@ -269,8 +382,7 @@ function display() {
   if (linkCount > 0) {
     linkList += "<ul>";
     for (var project of me.projects) {
-      //ta pętla nie działą :(( czemu
-      linkList += "<li>" + project.name + ", " + project.tech + ", " + project.link + "<input type='submit' value='edit' onclick='editLink()'><input type='submit' value='delete' onclick='deleteLink()'></li>";
+      linkList += "<li id='link" + project.id + "'>" + project.name + ", " + project.tech + ", <a href='" + project.link + "'>link</a><input type='submit' value='edit' onclick='editLink(this)'><input type='submit' value='delete' onclick='deleteLink(this)'></li>";
     }
     linkList += "</ul>";
   }
@@ -289,7 +401,7 @@ function display() {
 
       resps = resps.substr(0, resps.length-2);
 
-      jobList += "<li>" + job.proffesion + " at " + job.company + " specialized in " + job.branch + ", hired from " + job.dateHired + " to " + job.dateFired + ". located in " + job.city + ", " + job.country + ". having had responsibilities such as: " + resps + ". company address: " + job.address1 + " " + job.address2 + "<input type='submit' value='edit' onclick='editJob()'><input type='submit' value='delete' onclick='deleteJob()'></li>";
+      jobList += "<li id='job" + job.id + "'>" + job.proffesion + " at " + job.company + " specialized in " + job.branch + ", hired from " + job.dateHired + " to " + job.dateFired + ". located in " + job.city + ", " + job.country + ". having had responsibilities such as: " + resps + ". company address: " + job.address1 + " " + job.address2 + "<input type='submit' value='edit' onclick='editJob(this)'><input type='submit' value='delete' onclick='deleteJob(this)'></li>";
     }
     jobList += "</ul>";
   }
@@ -300,7 +412,7 @@ function display() {
   if (schoolCount > 0) {
     schoolList += "<ul>";
     for (var school of me.edu) {
-      schoolList += "<li><strong>Szkoła: </strong>" + school.school + ", <strong>profil/kierunek </strong>" + school.field + ", <strong> uczyłem/am się od</strong> " + school.dateStarted + " <strong>do</strong> " + school.dateFinished + ", <strong>miasto</strong> " + school.city + ", <strong>państwo</strong> " + school.country + "<input type='submit' value='edit' onclick='editSchool()'><input type='submit' value='delete' onclick='deleteSchool()'></li>";
+      schoolList += "<li id='school" + school.id + "'><strong>Szkoła: </strong>" + school.school + ", <strong>profil/kierunek </strong>" + school.field + ", <strong> uczyłem/am się od</strong> " + school.dateStarted + " <strong>do</strong> " + school.dateFinished + ", <strong>miasto</strong> " + school.city + ", <strong>państwo</strong> " + school.country + "<input type='submit' value='edit' onclick='editSchool(this)'><input type='submit' value='delete' onclick='deleteSchool(this)'></li>";
     }
     schoolList += "</ul>";
   }
@@ -309,7 +421,7 @@ function display() {
 
   document.getElementById("data-disp").innerHTML += "<h4>zdjęcia</h4><p><strong>zdjęcie główne: <img src='" + me.photo + "' alt='" + me.photoDesc + "'><br>zdjęcie profilowe: <img src='" + me.profPic + "'></strong></p>";
 
-  document.getElementById("data-disp").innerHTML += "<h4>kontakt</h4><p><strong>telefon:</strong> " + me.phone + "<strong>e-mail: </strong>" + me.email + "</p>";
+  document.getElementById("data-disp").innerHTML += "<h4>kontakt</h4><p><strong>telefon:</strong> " + me.phone + "<strong>, e-mail: </strong>" + me.email + "</p>";
 
   var skillList = "<p><strong>Umiejętności twarde: </strong>";
   for (skill of me.techSkills) {
@@ -322,6 +434,8 @@ function display() {
   skillList = skillList.substr(0, skillList.length-2) + "</p>";
 
   document.getElementById("data-disp").innerHTML += "<h4>umiejętności</h4>" + skillList;
+
+  document.getElementById("save").innerHTML = '<input type="submit" value="zapisz do bazy danych" onclick="saveToDB()"><input type="submit" value="odśwież" onclick="display()">'
 }
 
 function fillGoITFigma() {
