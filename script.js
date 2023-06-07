@@ -603,6 +603,7 @@ function fillCodersLabCard() {
 
   document.title = "Moja wizytówka";
 
+  document.body.innerHTML = "";
   document.body.innerHTML =
     '<div class="card"><header class="header"><img src="' +
     me.profPic +
@@ -649,6 +650,7 @@ function fillAmPsychCard() {
 
   document.title = "Moja wizytówka :)";
 
+  document.body.innerHTML = "";
   document.body.innerHTML =
     "<div id='info'><div id='contact'><a href='tel:" +
     me.phone +
