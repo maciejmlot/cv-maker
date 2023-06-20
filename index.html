@@ -5,20 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./script.js"></script>
-    <title>HUJ</title>
+    <title>CV MAKER</title>
+    <link rel='stylesheet' href='./start-style.css'></link>
   </head>
   <body onload="init()">
     <div id="start">
       <h1>Helo</h1>
       <h3>wprowadź dane</h3>
       <div id="input-form">
+        <div>
         <h4>podstawowe dane</h4>
         <input type="text" id="name" placeholder="twoje imie">
         <input type="text" id="proffesion" placeholder="twoj zawod">
         <input type="text" id="about" placeholder="krótko o tobie">
-        <br>
         <input type="text" id="signature" placeholder="url podpisu">
         <input id="save-basics" type="submit" value="zapisz" onclick="saveBasics()">
+        </div>
         <div id="links">
           <h4>link</h4>
           <input type="text" id="project-name" placeholder="nazwa projektu">
@@ -56,40 +58,48 @@
           <br>
           <input type="submit" value="dodaj" onclick="addSchool()">
         </div>
+        <div>
         <h4>zdjęcia</h4>
         <input type="text" id="photo" placeholder="url zdjęcia">
         <input type="text" id="photo-desc" placeholder="opis zdjęcia">
         <input type="text" id="profile-pic" placeholder="url zdjęcia profilowego">
         <br>
         <input id="save-photos" type="submit" value="zapisz" onclick="savePhotos()">
-        <h4>kontakt</h4>
-        <input type="text" id="phone" placeholder="telefon">
-        <input type="text" id="email" placeholder="email">
-        <input id="save-contacts" type="submit" value="zapisz" onclick="saveContacts()">
-        <h4>umiejętności</h4>
-        <input type="text" id="hard-skills" placeholder="umiejętności twarde">
-        <input type="text" id="soft-skills" placeholder="umiejętności miękkie">
-        <input id="save-skills" type="submit" value="zapisz" onclick="saveSkills()">
+        </div>
+        <div>
+          <h4>kontakt</h4>
+          <input type="text" id="phone" placeholder="telefon">
+          <input type="text" id="email" placeholder="email">
+          <input id="save-contacts" type="submit"   value="zapisz" onclick="saveContacts()">
+          <h4>umiejętności</h4>
+          <input type="text" id="hard-skills"   placeholder="umiejętności twarde">
+          <input type="text" id="soft-skills"   placeholder="umiejętności miękkie">
+          <input id="save-skills" type="submit" value="zapisz"  onclick="saveSkills()">
+        </div>
       </div>
       <div id="data-disp">
       </div>
-      <h4>zapis</h4>
-      <div id="save">
-        <input type="submit" value="podgląd" onclick="display()">
+      <div id="saving">
+        <h4>zapis</h4>
+        <div id="save">
+          <input type="submit" value="podgląd" onclick="display()">
+        </div>
       </div>
-      <h3>wybierz swój szablon cv:</h3>
-      <input type="submit" value="GoIT maraton" onclick="fillGoITFigma();" />
-      <input
-        type="submit"
-        value="CodersLab kurs"
-        onclick="fillCodersLabCard();"
-      />
-      <input type="submit" value="pracuj.pl CV" onclick="fillPracujPlCV();" />
-      <input
-        type="submit"
-        value="wizytuwka amerykańskiego psychola"
-        onclick="fillAmPsychCard();"
-      />
+      <div id="patterns">
+        <h3>wybierz swój szablon cv:</h3>
+        <input type="submit" value="GoIT maraton"   onclick="fillGoITFigma();" />
+        <input
+          type="submit"
+          value="CodersLab kurs"
+          onclick="fillCodersLabCard();"
+        />
+        <input type="submit" value="pracuj.pl CV"   onclick="fillPracujPlCV();" />
+        <input
+          type="submit"
+          value="wizytuwka amerykańskiego psychola"
+          onclick="fillAmPsychCard();"
+        />
+      </div>
     </div>
   </body>
 </html>

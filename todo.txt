@@ -2,5 +2,4 @@
 1b. wybor zapisanych danych z fb
 3. odswiezanie (zapis danych w ciasteczkach lub blokada) 
 5. zapis do pdf
-6. podgląd na stronie głównej z edycją
 7. rozdzielenie presetów na oddzielne arkusze html

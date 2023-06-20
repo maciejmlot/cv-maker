@@ -1,4 +1,4 @@
-//klasy, obiekty flagowe, fill()
+//klasy, wprowadzanie danych, różne fill()
 
 class Project {
   constructor(id, link, name, tech) {
@@ -83,7 +83,22 @@ class Person {
   }
 }
 
-const me = new Person("","","",Array(),Array(),Array(),"","","","",Array(),Array(),"","");
+const me = new Person(
+  "",
+  "",
+  "",
+  Array(),
+  Array(),
+  Array(),
+  "",
+  "",
+  "",
+  "",
+  Array(),
+  Array(),
+  "",
+  ""
+);
 
 var linkCount;
 
@@ -91,12 +106,18 @@ var jobCount;
 
 var schoolCount;
 
+var starthead;
+
+var startbody;
+
 function init() {
   linkCount = 0;
 
   jobCount = 0;
 
   schoolCount = 0;
+
+  starthead = document.head.innerHTML;
 }
 
 function saveBasics() {
@@ -108,7 +129,7 @@ function saveBasics() {
 }
 
 function addLink() {
-  if(linkCount == 0) {
+  if (linkCount == 0) {
     me.projects = Array();
   }
 
@@ -116,9 +137,9 @@ function addLink() {
     linkCount,
     document.getElementById("link").value,
     document.getElementById("project-name").value,
-    document.getElementById("skills").value,
-  )
-  
+    document.getElementById("skills").value
+  );
+
   document.getElementById("link").value = "";
   document.getElementById("project-name").value = "";
   document.getElementById("skills").value = "";
@@ -130,23 +151,38 @@ function editLink(elem) {
   var linkId = elem.parentNode.id;
 
   //dodać values
-  document.getElementById(linkId).innerHTML = "<input type='text' id='edit-" + linkId + "-name' placeholder='nazwa'><input type='text' id='edit-" + linkId + "-link' placeholder='link'><input type='text' id='edit-" + linkId + "-tech' placeholder='umiejętności'><input type='submit' id='" + linkId + "' value='OK' onclick='overwriteLink(this)'><input type='submit' value='anuluj' onclick='display()'>";
+  document.getElementById(linkId).innerHTML =
+    "<input type='text' id='edit-" +
+    linkId +
+    "-name' placeholder='nazwa'><input type='text' id='edit-" +
+    linkId +
+    "-link' placeholder='link'><input type='text' id='edit-" +
+    linkId +
+    "-tech' placeholder='umiejętności'><input type='submit' id='" +
+    linkId +
+    "' value='OK' onclick='overwriteLink(this)'><input type='submit' value='anuluj' onclick='display()'>";
 }
 
 function overwriteLink(elem) {
   var linkId = elem.id;
-  var id = linkId.substr(4,linkId.length);
+  var id = linkId.substr(4, linkId.length);
 
-  me.projects[id].name = document.getElementById("edit-" + linkId + "-name").value;
-  me.projects[id].link = document.getElementById("edit-" + linkId + "-link").value;
-  me.projects[id].tech = document.getElementById("edit-" + linkId + "-tech").value;
+  me.projects[id].name = document.getElementById(
+    "edit-" + linkId + "-name"
+  ).value;
+  me.projects[id].link = document.getElementById(
+    "edit-" + linkId + "-link"
+  ).value;
+  me.projects[id].tech = document.getElementById(
+    "edit-" + linkId + "-tech"
+  ).value;
 
   display();
 }
 
 function deleteLink(elem) {
   var linkId = elem.parentNode.id;
-  var id = linkId.substr(4,linkId.length);
+  var id = linkId.substr(4, linkId.length);
 
   var projects = Array();
 
@@ -169,7 +205,7 @@ function addJob() {
   var resps = Array();
   var resp = "";
   for (var c of document.getElementById("resps").value) {
-    if (c == ',') {
+    if (c == ",") {
       resps.push(resp);
       resp = "";
     } else {
@@ -192,7 +228,7 @@ function addJob() {
     document.getElementById("address1").value,
     document.getElementById("address2").value
   );
-  
+
   document.getElementById("occupation").value = "";
   document.getElementById("company").value = "";
   document.getElementById("branch").value = "";
@@ -210,27 +246,64 @@ function editJob(elem) {
   var jobId = elem.parentNode.id;
 
   //dodać values
-  document.getElementById(jobId).innerHTML = "<input type='text' id='edit-" + jobId + "-occupation' placeholder='zajęcie'><input type='text' id='edit-" + jobId + "-company' placeholder='nazwa firmy'><input type='text' id='edit-" + jobId + "-branch' placeholder='branża'><input type='text' id='edit-" + jobId + "-date-hired' placeholder='kiedy zaczęto'><input type='text' id='edit-" + jobId + "-date-fired' placeholder='kiedy skończono'><input type='text' id='edit-" + jobId + "-job-city' placeholder='miasto'><input type='text' id='edit-" + jobId + "-job-country' placeholder='kraj'><input type='text' id='edit-" + jobId + "-resps' placeholder='obowiązek1, obowiązek2...'><input type='text' id='edit-" + jobId + "-address1' placeholder='adres linia 1'><input type='text' id='edit-" + jobId + "-address2' placeholder='adres linia 2'><input type='submit' id='" + jobId + "' value='OK' onclick='overwriteJob(this)'><input type='submit' value='anuluj' onclick='display()'>";
+  document.getElementById(jobId).innerHTML =
+    "<input type='text' id='edit-" +
+    jobId +
+    "-occupation' placeholder='zajęcie'><input type='text' id='edit-" +
+    jobId +
+    "-company' placeholder='nazwa firmy'><input type='text' id='edit-" +
+    jobId +
+    "-branch' placeholder='branża'><input type='text' id='edit-" +
+    jobId +
+    "-date-hired' placeholder='kiedy zaczęto'><input type='text' id='edit-" +
+    jobId +
+    "-date-fired' placeholder='kiedy skończono'><input type='text' id='edit-" +
+    jobId +
+    "-job-city' placeholder='miasto'><input type='text' id='edit-" +
+    jobId +
+    "-job-country' placeholder='kraj'><input type='text' id='edit-" +
+    jobId +
+    "-resps' placeholder='obowiązek1, obowiązek2...'><input type='text' id='edit-" +
+    jobId +
+    "-address1' placeholder='adres linia 1'><input type='text' id='edit-" +
+    jobId +
+    "-address2' placeholder='adres linia 2'><input type='submit' id='" +
+    jobId +
+    "' value='OK' onclick='overwriteJob(this)'><input type='submit' value='anuluj' onclick='display()'>";
 }
 
 function overwriteJob(elem) {
   var jobId = elem.id;
   console.log(jobId);
-  var id = jobId.substr(3,jobId.length);
+  var id = jobId.substr(3, jobId.length);
   console.log(id);
 
-  me.jobs[id].proffesion = document.getElementById("edit-" + jobId + "-occupation").value;
-  me.jobs[id].company = document.getElementById("edit-" + jobId + "-company").value;
-  me.jobs[id].branch = document.getElementById("edit-" + jobId + "-branch").value;
-  me.jobs[id].dateHired = document.getElementById("edit-" + jobId + "-date-hired").value;
-  me.jobs[id].dateFired = document.getElementById("edit-" + jobId + "-date-fired").value;
-  me.jobs[id].city = document.getElementById("edit-" + jobId + "-job-city").value;
-  me.jobs[id].country = document.getElementById("edit-" + jobId + "-job-country").value;
+  me.jobs[id].proffesion = document.getElementById(
+    "edit-" + jobId + "-occupation"
+  ).value;
+  me.jobs[id].company = document.getElementById(
+    "edit-" + jobId + "-company"
+  ).value;
+  me.jobs[id].branch = document.getElementById(
+    "edit-" + jobId + "-branch"
+  ).value;
+  me.jobs[id].dateHired = document.getElementById(
+    "edit-" + jobId + "-date-hired"
+  ).value;
+  me.jobs[id].dateFired = document.getElementById(
+    "edit-" + jobId + "-date-fired"
+  ).value;
+  me.jobs[id].city = document.getElementById(
+    "edit-" + jobId + "-job-city"
+  ).value;
+  me.jobs[id].country = document.getElementById(
+    "edit-" + jobId + "-job-country"
+  ).value;
 
   var resps = Array();
   var resp = "";
   for (var c of document.getElementById("edit-" + jobId + "-resps").value) {
-    if (c == ',') {
+    if (c == ",") {
       resps.push(resp);
       resp = "";
     } else {
@@ -240,15 +313,19 @@ function overwriteJob(elem) {
   resps.push(resp);
   me.jobs[id].responsibilities = resps;
 
-  me.jobs[id].address1 = document.getElementById("edit-" + jobId + "-address1").value;
-  me.jobs[id].address2 = document.getElementById("edit-" + jobId + "-address2").value;
+  me.jobs[id].address1 = document.getElementById(
+    "edit-" + jobId + "-address1"
+  ).value;
+  me.jobs[id].address2 = document.getElementById(
+    "edit-" + jobId + "-address2"
+  ).value;
 
   display();
 }
 
 function deleteJob(elem) {
   var jobId = elem.parentNode.id;
-  var id = jobId.substr(3,jobId.length);
+  var id = jobId.substr(3, jobId.length);
 
   var jobs = Array();
 
@@ -276,8 +353,8 @@ function addSchool() {
     document.getElementById("date-finished").value,
     document.getElementById("school-city").value,
     document.getElementById("school-country").value
-  )
-  
+  );
+
   document.getElementById("school").value = "";
   document.getElementById("field").value = "";
   document.getElementById("date-started").value = "";
@@ -292,19 +369,46 @@ function editSchool(elem) {
   var schoolId = elem.parentNode.id;
 
   //dodać values
-  document.getElementById(schoolId).innerHTML = "<input type='text' id='edit-" + schoolId + "-school' placeholder='nazwa szkoły'><input type='text' id='edit-" + schoolId + "-field' placeholder='profil/kierunek'><input type='text' id='edit-" + schoolId + "-date-started' placeholder='data rozpoczęcia'><input type='text' id='edit-" + schoolId + "-date-finished' placeholder='data zakończenia'><input type='text' id='edit-" + schoolId + "-school-city' placeholder='miasto'><input type='text' id='edit-" + schoolId + "-school-country' placeholder='kraj'><input type='submit' id='" + schoolId + "' value='OK' onclick='overwriteSchool(this)'><input type='submit' value='anuluj' onclick='display()'>";
+  document.getElementById(schoolId).innerHTML =
+    "<input type='text' id='edit-" +
+    schoolId +
+    "-school' placeholder='nazwa szkoły'><input type='text' id='edit-" +
+    schoolId +
+    "-field' placeholder='profil/kierunek'><input type='text' id='edit-" +
+    schoolId +
+    "-date-started' placeholder='data rozpoczęcia'><input type='text' id='edit-" +
+    schoolId +
+    "-date-finished' placeholder='data zakończenia'><input type='text' id='edit-" +
+    schoolId +
+    "-school-city' placeholder='miasto'><input type='text' id='edit-" +
+    schoolId +
+    "-school-country' placeholder='kraj'><input type='submit' id='" +
+    schoolId +
+    "' value='OK' onclick='overwriteSchool(this)'><input type='submit' value='anuluj' onclick='display()'>";
 }
 
 function overwriteSchool(elem) {
   var schoolId = elem.id;
-  var id = schoolId.substr(6,schoolId.length);
+  var id = schoolId.substr(6, schoolId.length);
 
-  me.edu[id].school = document.getElementById("edit-" + schoolId + "-school").value;
-  me.edu[id].field = document.getElementById("edit-" + schoolId + "-field").value;
-  me.edu[id].dateStarted = document.getElementById("edit-" + schoolId + "-date-started").value;
-  me.edu[id].dateFinished = document.getElementById("edit-" + schoolId + "-date-finished").value;
-  me.edu[id].city = document.getElementById("edit-" + schoolId + "-school-city").value;
-  me.edu[id].country = document.getElementById("edit-" + schoolId + "-school-country").value;
+  me.edu[id].school = document.getElementById(
+    "edit-" + schoolId + "-school"
+  ).value;
+  me.edu[id].field = document.getElementById(
+    "edit-" + schoolId + "-field"
+  ).value;
+  me.edu[id].dateStarted = document.getElementById(
+    "edit-" + schoolId + "-date-started"
+  ).value;
+  me.edu[id].dateFinished = document.getElementById(
+    "edit-" + schoolId + "-date-finished"
+  ).value;
+  me.edu[id].city = document.getElementById(
+    "edit-" + schoolId + "-school-city"
+  ).value;
+  me.edu[id].country = document.getElementById(
+    "edit-" + schoolId + "-school-country"
+  ).value;
 
   display();
 }
@@ -345,20 +449,20 @@ function saveSkills() {
   var skill = "";
 
   for (var c of document.getElementById("hard-skills").value) {
-    if (c == ',') {
+    if (c == ",") {
       techs.push(skill);
-      skill="";
+      skill = "";
     } else {
       skill += c;
     }
   }
   techs.push(skill);
-  skill="";
+  skill = "";
 
   for (var c of document.getElementById("soft-skills").value) {
-    if (c == ',') {
+    if (c == ",") {
       softs.push(skill);
-      skill="";
+      skill = "";
     } else {
       skill += c;
     }
@@ -376,13 +480,31 @@ function saveToDB() {
 }
 
 function display() {
-  document.getElementById("data-disp").innerHTML = "<h4>podstawowe dane</h4><p><strong>imie i nazwisko: </strong>" + me.fullName + "<strong>, zawód: </strong>" + me.field + "<strong>, o mnie: </strong>" + me.about + "</p><img src='" + me.signature + "' alt='podpis'><p><strong>^podpis^</strong></p>";
+  document.getElementById("data-disp").innerHTML =
+    "<h4>podstawowe dane</h4><p><strong>imie i nazwisko: </strong>" +
+    me.fullName +
+    "<strong>, zawód: </strong>" +
+    me.field +
+    "<strong>, o mnie: </strong>" +
+    me.about +
+    "</p><img src='" +
+    me.signature +
+    "' alt='podpis'><p><strong>^podpis^</strong></p>";
 
   var linkList = "";
   if (linkCount > 0) {
     linkList += "<ul>";
     for (var project of me.projects) {
-      linkList += "<li id='link" + project.id + "'>" + project.name + ", " + project.tech + ", <a href='" + project.link + "'>link</a><input type='submit' value='edit' onclick='editLink(this)'><input type='submit' value='delete' onclick='deleteLink(this)'></li>";
+      linkList +=
+        "<li id='link" +
+        project.id +
+        "'>" +
+        project.name +
+        ", " +
+        project.tech +
+        ", <a href='" +
+        project.link +
+        "'>link</a><input type='submit' value='edit' onclick='editLink(this)'><input type='submit' value='delete' onclick='deleteLink(this)'></li>";
     }
     linkList += "</ul>";
   }
@@ -399,29 +521,81 @@ function display() {
         resps += resp + ", ";
       }
 
-      resps = resps.substr(0, resps.length-2);
+      resps = resps.substr(0, resps.length - 2);
 
-      jobList += "<li id='job" + job.id + "'>" + job.proffesion + " at " + job.company + " specialized in " + job.branch + ", hired from " + job.dateHired + " to " + job.dateFired + ". located in " + job.city + ", " + job.country + ". having had responsibilities such as: " + resps + ". company address: " + job.address1 + " " + job.address2 + "<input type='submit' value='edit' onclick='editJob(this)'><input type='submit' value='delete' onclick='deleteJob(this)'></li>";
+      jobList +=
+        "<li id='job" +
+        job.id +
+        "'>" +
+        job.proffesion +
+        " at " +
+        job.company +
+        " specialized in " +
+        job.branch +
+        ", hired from " +
+        job.dateHired +
+        " to " +
+        job.dateFired +
+        ". located in " +
+        job.city +
+        ", " +
+        job.country +
+        ". having had responsibilities such as: " +
+        resps +
+        ". company address: " +
+        job.address1 +
+        " " +
+        job.address2 +
+        "<input type='submit' value='edit' onclick='editJob(this)'><input type='submit' value='delete' onclick='deleteJob(this)'></li>";
     }
     jobList += "</ul>";
   }
 
-  document.getElementById("data-disp").innerHTML += "<h4>doswiadczenie zawodowe</h4>" + jobList;
+  document.getElementById("data-disp").innerHTML +=
+    "<h4>doswiadczenie zawodowe</h4>" + jobList;
 
   var schoolList = "";
   if (schoolCount > 0) {
     schoolList += "<ul>";
     for (var school of me.edu) {
-      schoolList += "<li id='school" + school.id + "'><strong>Szkoła: </strong>" + school.school + ", <strong>profil/kierunek </strong>" + school.field + ", <strong> uczyłem/am się od</strong> " + school.dateStarted + " <strong>do</strong> " + school.dateFinished + ", <strong>miasto</strong> " + school.city + ", <strong>państwo</strong> " + school.country + "<input type='submit' value='edit' onclick='editSchool(this)'><input type='submit' value='delete' onclick='deleteSchool(this)'></li>";
+      schoolList +=
+        "<li id='school" +
+        school.id +
+        "'><strong>Szkoła: </strong>" +
+        school.school +
+        ", <strong>profil/kierunek </strong>" +
+        school.field +
+        ", <strong> uczyłem/am się od</strong> " +
+        school.dateStarted +
+        " <strong>do</strong> " +
+        school.dateFinished +
+        ", <strong>miasto</strong> " +
+        school.city +
+        ", <strong>państwo</strong> " +
+        school.country +
+        "<input type='submit' value='edit' onclick='editSchool(this)'><input type='submit' value='delete' onclick='deleteSchool(this)'></li>";
     }
     schoolList += "</ul>";
   }
 
-  document.getElementById("data-disp").innerHTML += "<h4>edukacja</h4>" + schoolList;
+  document.getElementById("data-disp").innerHTML +=
+    "<h4>edukacja</h4>" + schoolList;
 
-  document.getElementById("data-disp").innerHTML += "<h4>zdjęcia</h4><p><strong>zdjęcie główne: <img src='" + me.photo + "' alt='" + me.photoDesc + "'><br>zdjęcie profilowe: <img src='" + me.profPic + "'></strong></p>";
+  document.getElementById("data-disp").innerHTML +=
+    "<h4>zdjęcia</h4><p><strong>zdjęcie główne: <img src='" +
+    me.photo +
+    "' alt='" +
+    me.photoDesc +
+    "'><br>zdjęcie profilowe: <img src='" +
+    me.profPic +
+    "'></strong></p>";
 
-  document.getElementById("data-disp").innerHTML += "<h4>kontakt</h4><p><strong>telefon:</strong> " + me.phone + "<strong>, e-mail: </strong>" + me.email + "</p>";
+  document.getElementById("data-disp").innerHTML +=
+    "<h4>kontakt</h4><p><strong>telefon:</strong> " +
+    me.phone +
+    "<strong>, e-mail: </strong>" +
+    me.email +
+    "</p>";
 
   var skillList = "<p><strong>Umiejętności twarde: </strong>";
   for (skill of me.techSkills) {
@@ -431,14 +605,18 @@ function display() {
   for (skill of me.softSkills) {
     skillList += skill + ", ";
   }
-  skillList = skillList.substr(0, skillList.length-2) + "</p>";
+  skillList = skillList.substr(0, skillList.length - 2) + "</p>";
 
-  document.getElementById("data-disp").innerHTML += "<h4>umiejętności</h4>" + skillList;
+  document.getElementById("data-disp").innerHTML +=
+    "<h4>umiejętności</h4>" + skillList;
 
-  document.getElementById("save").innerHTML = '<input type="submit" value="zapisz do bazy danych" onclick="saveToDB()"><input type="submit" value="odśwież" onclick="display()">'
+  document.getElementById("save").innerHTML =
+    '<input type="submit" value="zapisz do bazy danych" onclick="saveToDB()"><input type="submit" value="odśwież" onclick="display()">';
 }
 
 function fillGoITFigma() {
+  startbody = document.body.innerHTML;
+
   var techSkills = "";
   var softSkills = "";
 
@@ -544,8 +722,8 @@ function fillGoITFigma() {
     }
   }
 
-  document.head.innerHTML +=
-    "<link rel='stylesheet' href='./goit-style.css'></link><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>";
+  document.head.innerHTML =
+    "<meta charset='UTF-8' /><meta http-equiv='X-UA-Compatible' content='IE=edge' /><meta name='viewport' content='width=device-width, initial-scale=1.0' /><script src='./script.js'></script><link rel='stylesheet' href='./goit-style.css'></link><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>";
 
   document.title = "CV";
 
@@ -586,6 +764,13 @@ function fillGoITFigma() {
 }
 
 function fillCodersLabCard() {
+  startbody = document.body.innerHTML;
+
+  document.head.innerHTML =
+    "<meta charset='UTF-8' /><meta http-equiv='X-UA-Compatible' content='IE=edge' /><meta name='viewport' content='width=device-width, initial-scale=1.0' /><script src='./script.js'></script><link rel='stylesheet' href='./codlab-style.css'></link><link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>";
+
+  document.title = "Moja wizytówka";
+
   var links = "";
   if (me.projects[0] != "") {
     for (var project of me.projects) {
@@ -597,11 +782,6 @@ function fillCodersLabCard() {
         "</a>";
     }
   }
-
-  document.head.innerHTML +=
-    "<link rel='stylesheet' href='./codlab-style.css'></link><link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>";
-
-  document.title = "Moja wizytówka";
 
   document.body.innerHTML = "";
   document.body.innerHTML =
@@ -631,7 +811,12 @@ function fillCodersLabCard() {
 }
 
 function fillAmPsychCard() {
-  document.head.innerHTML += "<link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'>"
+  startbody = document.body.innerHTML;
+
+  document.head.innerHTML =
+    "<meta charset='UTF-8' /><meta http-equiv='X-UA-Compatible' content='IE=edge' /><meta name='viewport' content='width=device-width, initial-scale=1.0' /><script src='./script.js'></script><link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'></link><link rel='stylesheet' href='./ampsych-style.css'></link>";
+
+  document.title = "Moja wizytówka :)";
 
   var upper = false;
   var name = "";
@@ -644,11 +829,6 @@ function fillAmPsychCard() {
     }
     name += c;
   }
-
-  document.head.innerHTML +=
-    "<link href='https://fonts.cdnfonts.com/css/copperplate' rel='stylesheet'><link rel='stylesheet' href='./ampsych-style.css'></link>";
-
-  document.title = "Moja wizytówka :)";
 
   document.body.innerHTML = "";
   document.body.innerHTML =
@@ -673,4 +853,9 @@ function fillAmPsychCard() {
     ", " +
     me.jobs[0].country +
     "</div>";
+}
+
+function refillStart() {
+  document.head = starthead;
+  document.body = startbody;
 }
