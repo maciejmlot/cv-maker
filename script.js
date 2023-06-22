@@ -121,11 +121,13 @@ function init() {
 }
 
 function saveBasics() {
-  me.fullName = document.getElementById("name").value;
-  me.field = document.getElementById("proffesion").value;
-  me.about = document.getElementById("about").value;
-  me.signature = document.getElementById("signature").value;
-  document.getElementById("save-basics").value = "nadpisz";
+    me.fullName = document.getElementById("name").value;
+    me.field = document.getElementById("proffesion").value;
+    me.about = document.getElementById("about").value;
+    me.signature = document.getElementById("signature").value;
+    document.getElementById("save-basics").value = "nadpisz";
+
+
 }
 
 function addLink() {
@@ -476,8 +478,66 @@ function saveSkills() {
 }
 
 function saveToDB() {
-  //WITAJ JAKUBIE
+    // Dane z obiektu me.jobs
+    var jobsData = JSON.stringify(me.jobs);
+
+    // Dane z tablicy projects
+    var projectsData = JSON.stringify(me.projects);
+
+    // Dane z tablicy edu
+    var eduData = JSON.stringify(me.edu);
+
+    // Dane z pól tekstowych
+    var basicsData =
+        'name=' +
+        encodeURIComponent(me.fullName) +
+        '&profession=' +
+        encodeURIComponent(me.field) +
+        '&about=' +
+        encodeURIComponent(me.about) +
+        '&signature=' +
+        encodeURIComponent(me.signature) +
+        '&photo=' +
+        encodeURIComponent(me.photo) +
+        '&photoDesc=' +
+        encodeURIComponent(me.photoDesc) +
+        '&profPic=' +
+        encodeURIComponent(me.profPic) +
+        '&phone=' +
+        encodeURIComponent(me.phone) +
+        '&email=' +
+        encodeURIComponent(me.email) +
+        '&techSkills=' +
+        encodeURIComponent(me.techSkills) +
+        '&softSkills=' +
+        encodeURIComponent(me.softSkills);
+
+    // Wysyłanie danych POST za pomocą fetch()
+    fetch('./backend.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body:
+            basicsData +
+            '&jobs=' +
+            encodeURIComponent(jobsData) +
+            '&projects=' +
+            encodeURIComponent(projectsData) +
+            '&edu=' +
+            encodeURIComponent(eduData),
+
+        })
+        .then((response) => {
+            // Obsługa odpowiedzi serwera
+            console.log('Dane zapisane.');
+        })
+        .catch((error) => {
+            console.error('Wystąpił błąd podczas zapisywania danych:', error);
+        });
+
 }
+
 
 function display() {
   document.getElementById("data-disp").innerHTML =
@@ -527,7 +587,7 @@ function display() {
         "<li id='job" +
         job.id +
         "'>" +
-        job.proffesion +
+        job.field +
         " at " +
         job.company +
         " specialized in " +
