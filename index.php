@@ -23,6 +23,7 @@
         <input type="text" id="name" placeholder="twoje imie">
         <input type="text" id="proffesion" placeholder="twoj zawod">
         <input type="text" id="about" placeholder="krótko o tobie">
+        <br>
         <input type="text" id="signature" placeholder="url podpisu">
         <input id="save-basics" type="submit" value="zapisz" onclick="saveBasics()">
         </div>
