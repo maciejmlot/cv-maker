@@ -538,6 +538,15 @@ function saveToDB() {
 
 }
 
+function selectFromDB() {
+  const element = new Person();
+  //miejsce na kod kuby
+
+  document.getElementById("save-basics").value = "nadpisz";
+  document.getElementById("save-photos").value = "nadpisz";
+  document.getElementById("save-contacts").value = "nadpisz";
+  display();
+}
 
 function display() {
   document.getElementById("data-disp").innerHTML =

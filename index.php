@@ -16,6 +16,7 @@
     <div id="start">
       <h1>Helo</h1>
       <h3>wprowadź dane</h3>
+      <input type="submit" value="wczytaj z bazy danych" onclick="selectFromDB()">
       <div id="input-form">
         <div>
         <h4>podstawowe dane</h4>
