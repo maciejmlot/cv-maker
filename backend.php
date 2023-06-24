@@ -1,5 +1,5 @@
-<?php
-// Ustawienie nag³ówka Content-Type na text/html
+ï»¿<?php
+// Ustawienie nagÅ‚Ã³wka Content-Type na text/html
 header('Content-Type: text/html');
 
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /*
     $file = './data.txt';
 
-    // Formatuj dane w postaci ci¹gu znaków
+    // Formatuj dane w postaci ciï¿½gu znakï¿½w
     $content = $photoUrl .
                $photoDesc .
                $profilePic .
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
-        die("Nieudane po³¹czenie z baz¹ danych: " . $conn->connect_error);
+        die("Nieudane poï¿½ï¿½czenie z bazï¿½ danych: " . $conn->connect_error);
     }
 
     $createTableDane = "CREATE TABLE IF NOT EXISTS Dane (
@@ -105,35 +105,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
     if ($conn->query($createTableDane) === TRUE) {
-        echo "Tabela 'Dane' zosta³a utworzona lub ju¿ istnieje.<br>";
+        echo "Tabela 'Dane' zostaï¿½a utworzona lub juï¿½ istnieje.<br>";
     } else {
-        echo "B³¹d tworzenia tabeli 'Dane': " . $conn->error;
+        echo "Bï¿½ï¿½d tworzenia tabeli 'Dane': " . $conn->error;
     }
 
     if ($conn->query($createTablePrace) === TRUE) {
-        echo "Tabela 'Prace' zosta³a utworzona lub ju¿ istnieje.<br>";
+        echo "Tabela 'Prace' zostaï¿½a utworzona lub juï¿½ istnieje.<br>";
     } else {
-        echo "B³¹d tworzenia tabeli 'Prace': " . $conn->error;
+        echo "Bï¿½ï¿½d tworzenia tabeli 'Prace': " . $conn->error;
     }
 
     if ($conn->query($createTableProjects) === TRUE) {
-        echo "Tabela 'Projects' zosta³a utworzona lub ju¿ istnieje.<br>";
+        echo "Tabela 'Projects' zostaï¿½a utworzona lub juï¿½ istnieje.<br>";
     } else {
-        echo "B³¹d tworzenia tabeli 'Projects': " . $conn->error;
+        echo "Bï¿½ï¿½d tworzenia tabeli 'Projects': " . $conn->error;
     }
 
     if ($conn->query($createTableEdu) === TRUE) {
-        echo "Tabela 'Edu' zosta³a utworzona lub ju¿ istnieje.<br>";
+        echo "Tabela 'Edu' zostaï¿½a utworzona lub juï¿½ istnieje.<br>";
     } else {
-        echo "B³¹d tworzenia tabeli 'Edu': " . $conn->error;
+        echo "Bï¿½ï¿½d tworzenia tabeli 'Edu': " . $conn->error;
     }
     
     $sql = "INSERT INTO Dane (name, profession, about, signature, photoUrl, photoDesc, profilePic, phone, email, techSkills, softSkills) VALUES ('$name', '$profession', '$about', '$signature', '$photoUrl', '$photoDesc', '$profilePic', '$phone', '$email', '$techSkills', '$softSkills')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Dane zosta³y dodane do tabeli 'Dane'.<br>";
+        echo "Dane zostaï¿½y dodane do tabeli 'Dane'.<br>";
     } else {
-        echo "B³¹d dodawania danych do tabeli 'Dane': " . $conn->error;
+        echo "Bï¿½ï¿½d dodawania danych do tabeli 'Dane': " . $conn->error;
     }
 
     $daneId = $conn->insert_id; // Pobranie ID ostatnio wstawionego rekordu w tabeli 'Dane'
@@ -155,11 +155,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertJobSQL = "INSERT INTO Prace (profession, company, branch, dateHired, dateFired, city, country, responsibilities, address1, address2, dane_id) VALUES ('$jobProfession', '$jobCompany', '$jobBranch', '$jobDateHired', '$jobDateFired', '$jobCity', '$jobCountry', '$jobResponsibilities', '$jobAddress1', '$jobAddress2', '$daneId')";
 
         if ($conn->query($insertJobSQL) !== TRUE) {
-            echo "B³¹d dodawania danych do tabeli 'Prace': " . $conn->error;
+            echo "Bï¿½ï¿½d dodawania danych do tabeli 'Prace': " . $conn->error;
         }
     }
 
-    echo "Dane zosta³y dodane do tabeli 'Prace'.<br>";
+    echo "Dane zostaï¿½y dodane do tabeli 'Prace'.<br>";
 
         $projects = json_decode($projectsData, true); // Dekodowanie danych z tablicy projects
 
@@ -171,11 +171,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertProjectSQL = "INSERT INTO Projects (title, description, url, dane_id) VALUES ('$projectTitle', '$projectDescription', '$projectUrl', '$daneId')";
 
         if ($conn->query($insertProjectSQL) !== TRUE) {
-            echo "B³¹d dodawania danych do tabeli 'Projects': " . $conn->error;
+            echo "Bï¿½ï¿½d dodawania danych do tabeli 'Projects': " . $conn->error;
         }
     }
 
-    echo "Dane zosta³y dodane do tabeli 'Projects'.<br>";
+    echo "Dane zostaï¿½y dodane do tabeli 'Projects'.<br>";
     
         $edu = json_decode($eduData, true); // Dekodowanie danych z tablicy edu
     
@@ -190,12 +190,109 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insertEduSQL = "INSERT INTO Edu (field, school, dateStart, dateEnd, city, country, dane_id) VALUES ('$eduField', '$eduSchool', '$eduDateStart', '$eduDateEnd', '$eduCity', '$eduCountry','$daneId')";
 
         if ($conn->query($insertEduSQL) !== TRUE) {
-            echo "B³¹d dodawania danych do tabeli 'Edu': " . $conn->error;
+            echo "Bï¿½ï¿½d dodawania danych do tabeli 'Edu': " . $conn->error;
         }
     }
 
-    echo "Dane zosta³y dodane do tabeli 'Edu'.<br>";
+    echo "Dane zostaï¿½y dodane do tabeli 'Edu'.<br>";
     
     $conn->close();
+}
+
+if(isset($_GET['selected']) && $_GET['selected'] === 'true')
+{
+ $filename = 'plik.txt';
+
+$file = fopen($filename, 'w'); // Otwiera plik w trybie zapisu (tworzy go, jeÅ›li nie istnieje)
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cvmaker";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Nieudane poÅ‚Ä…czenie z bazÄ… danych: " . $conn->connect_error);
+}
+
+// Zapytanie SQL
+$sql = "SELECT d.name, d.profession, d.about, d.signature, p.title, p.description, p.url, d.techSkills, d.softSkills, pr.profession AS jobProfession, pr.company, pr.branch, pr.dateHired, pr.dateFired, pr.city AS jobCity, pr.country AS jobCountry, pr.responsibilities, e.field, e.school, e.dateStart, e.dateEnd, e.city AS eduCity, e.country AS eduCountry, d.photoUrl, d.photoDesc, d.profilePic, d.phone, d.email, pr.address1, pr.address2
+    FROM Dane d
+    LEFT JOIN Prace pr ON d.id = pr.dane_id
+    LEFT JOIN Projects p ON d.id = p.dane_id
+    LEFT JOIN Edu e ON d.id = e.dane_id
+    WHERE d.id = 1";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Tworzenie tablicy wynikowej
+    $data = $result->fetch_assoc();
+    mysqli_data_seek($result, 0);
+    // Pobieranie wszystkich prac dla danej osoby
+    $jobs = array();
+    $projects = array();
+    $edu = array();
+    
+    while ($row = $result->fetch_assoc()) {
+        if (!empty($row['jobProfession'])) {
+            $job = array(
+                'jobProfession' => $row['jobProfession'],
+                'company' => $row['company'],
+                'branch' => $row['branch'],
+                'dateHired' => $row['dateHired'],
+                'dateFired' => $row['dateFired'],
+                'jobCity' => $row['jobCity'],
+                'jobCountry' => $row['jobCountry'],
+                'responsibilities' => $row['responsibilities']
+            );
+            $jobs[] = $job;
+        }
+        
+        if (!empty($row['title'])) {
+            $project = array(
+                'title' => $row['title'],
+                'description' => $row['description'],
+                'url' => $row['url']
+            );
+            $projects[] = $project;
+        }
+        
+        if (!empty($row['field'])) {
+            $eduItem = array(
+                'field' => $row['field'],
+                'school' => $row['school'],
+                'dateStart' => $row['dateStart'],
+                'dateEnd' => $row['dateEnd'],
+                'eduCity' => $row['eduCity'],
+                'eduCountry' => $row['eduCountry']
+            );
+            $edu[] = $eduItem;
+        }
+    }
+    
+    // PrzesuniÄ™cie wskaÅºnika wiersza rezultatu na poczÄ…tek
+    
+    
+    // Dodawanie pracy, projektÃ³w i edukacji do danych gÅ‚Ã³wnych
+    $data['jobs'] = $jobs;
+    $data['projects'] = $projects;
+    $data['edu'] = $edu;
+
+    // Zapis wynikÃ³w do pliku txt
+    $fileContent = json_encode($data);
+    fwrite($file, $fileContent);
+
+    // Zwracanie wynikÃ³w w formacie JSON
+    header('Content-Type: application/json');
+    echo json_encode($data);
+} else {
+    echo "Brak danych w bazie.";
+}
+
+fclose($file);
+$conn->close();
+
+
 }
 ?>
