@@ -221,7 +221,7 @@ $sql = "SELECT d.name, d.profession, d.about, d.signature, p.title, p.descriptio
     LEFT JOIN Prace pr ON d.id = pr.dane_id
     LEFT JOIN Projects p ON d.id = p.dane_id
     LEFT JOIN Edu e ON d.id = e.dane_id
-    WHERE d.id = 1";
+    WHERE d.id = (SELECT MAX(id) FROM Dane)";
 
 $result = $conn->query($sql);
 
