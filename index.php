@@ -14,7 +14,7 @@
 </head>
   <body onload="init()">
     <div id="start">
-      <h1>Helo</h1>
+      <h1>Witaj w przeglądarkowym kreatorze swojego CV!</h1>
       <h3>wprowadź dane</h3>
       <input type="submit" value="wczytaj z bazy danych" onclick="selectFromDB()">
       <div id="input-form">
@@ -93,16 +93,16 @@
       </div>
       <div id="patterns">
         <h3>wybierz swój szablon cv:</h3>
+        <p>(upewnij się, że zapisałeś swoje dane do bazy, jeśli taki był twój zamiar.)</p>
         <input type="submit" value="GoIT maraton"   onclick="fillGoITFigma();" />
         <input
           type="submit"
           value="CodersLab kurs"
           onclick="fillCodersLabCard();"
         />
-        <input type="submit" value="pracuj.pl CV"   onclick="fillPracujPlCV();" />
         <input
           type="submit"
-          value="wizytuwka amerykańskiego psychola"
+          value="American Psycho Card"
           onclick="fillAmPsychCard();"
         />
       </div>

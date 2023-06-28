@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+#start {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#input-form {
+  margin-top: 20px;
+}
+
+#input-form h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#input-form input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+#links,
+#jobs,
+#edu {
+  margin-bottom: 20px;
+}
+
+#links h4,
+#jobs h4,
+#edu h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#links input[type="submit"],
+#jobs input[type="submit"],
+#edu input[type="submit"] {
+  width: auto;
+  padding: 6px 10px;
+}
+
+#data-disp {
+  margin-top: 20px;
+}
+
+#saving {
+  margin-top: 20px;
+}
+
+#saving h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#patterns {
+  margin-top: 20px;
+}
+
+#patterns h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#patterns input[type="submit"] {
+  display: inline-block;
+  width: auto;
+  padding: 10px;
+  margin-right: 10px;
+  background-color: #337ab7;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
