@@ -533,7 +533,6 @@ function saveToDB() {
 }
 
 function selectFromDB() {
-  const element = new Person();
   console.log("Test.");
 
   fetch("./backend.php?selected=true")
@@ -583,11 +582,17 @@ function selectFromDB() {
       console.error("Wystąpił błąd:", error);
     });
 
-  me = data;
+  saveBasics();
+  me.projects = Array();
+  addLink();
+  me.jobs = Array();
+  addJob();
+  me.edu = Array();
+  addSchool();
+  savePhotos();
+  saveContacts();
+  saveSkills();
 
-  document.getElementById("save-basics").value = "nadpisz";
-  document.getElementById("save-photos").value = "nadpisz";
-  document.getElementById("save-contacts").value = "nadpisz";
   display();
 }
 
