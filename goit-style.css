@@ -100,6 +100,9 @@ aside div section div {
 #projects img {
   height: 14px;
 }
+main section p {
+  width: 525px;
+}
 
 .company-name {
   color: orangered;
